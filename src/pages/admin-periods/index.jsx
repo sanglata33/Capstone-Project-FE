@@ -115,6 +115,22 @@ const AdminPeriods = () => {
       showError('Vui lòng điền đầy đủ thông tin!');
       return;
     }
+    const start = new Date(formData.startDate);
+    const end = new Date(formData.endDate);
+    if (end <= start) {
+      showError('Ngày kết thúc đợt phải sau ngày bắt đầu!');
+      return;
+    }
+    // Lấy học kỳ hiện tại để kiểm tra phạm vi ngày
+    const semester = semesters.find(s => s.id === selectedSemesterId);
+    if (semester) {
+      const semesterStart = new Date(semester.startDate);
+      const semesterEnd = new Date(semester.endDate);
+      if (start < semesterStart || end > semesterEnd) {
+        showError('Ngày đợt phải nằm trong phạm vi của học kỳ!');
+        return;
+      }
+    }
     try {
       await createPeriod({ ...formData, semesterId: selectedSemesterId });
       showSuccess('Tạo đợt đăng ký thành công!');

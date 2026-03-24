@@ -23,7 +23,7 @@ const AdminSidebar = ({ isCollapsed, onToggle }) => {
           <rect x="3" y="14" width="7" height="7" />
         </svg>
       ),
-      label: 'Dashboard',
+      label: 'Bảng điều khiển',
     },
     {
       path: '/admin/theses',
@@ -36,7 +36,7 @@ const AdminSidebar = ({ isCollapsed, onToggle }) => {
           <polyline points="10 9 9 9 8 9" />
         </svg>
       ),
-      label: 'Theses',
+      label: 'Đề tài',
     },
     {
       path: '/admin/periods',
@@ -48,7 +48,7 @@ const AdminSidebar = ({ isCollapsed, onToggle }) => {
           <line x1="3" y1="10" x2="21" y2="10" />
         </svg>
       ),
-      label: 'Periods',
+      label: 'Đợt đăng ký',
     },
     {
       path: '/admin/users',
@@ -60,7 +60,7 @@ const AdminSidebar = ({ isCollapsed, onToggle }) => {
           <path d="M16 3.13a4 4 0 0 1 0 7.75" />
         </svg>
       ),
-      label: 'Users',
+      label: 'Người dùng',
     },
     // {
     //   path: '/admin/lecturers',
@@ -110,7 +110,7 @@ const AdminSidebar = ({ isCollapsed, onToggle }) => {
               </linearGradient>
             </defs>
           </svg>
-          {!isCollapsed && <span className="sidebar-title">Admin Panel</span>}
+          {!isCollapsed && <span className="sidebar-title">Quản trị viên</span>}
         </div>
         <button className="sidebar-toggle" onClick={onToggle}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
