@@ -129,8 +129,8 @@ const Login = () => {
                 </defs>
               </svg>
             </div>
-            <h1 className="login-title">Welcome Back</h1>
-            <p className="login-subtitle">Sign in to your thesis portal account</p>
+            <h1 className="login-title">Hệ Thống Nộp Đề Tài</h1>
+            <p className="login-subtitle">Đăng nhập để sử dụng hệ thống quản lý, nộp và xét duyệt đề tài tốt nghiệp</p>
           </div>
 
           <form onSubmit={handleSubmit} className="login-form">
@@ -148,8 +148,8 @@ const Login = () => {
             <Input
               type="text"
               name="email"
-              label="Email or Username"
-              placeholder="Enter your email or username"
+              label="Email hoặc Tên đăng nhập"
+              placeholder="Nhập email hoặc tên đăng nhập"
               value={formData.email}
               onChange={handleChange}
               error={formErrors.email}
@@ -159,8 +159,8 @@ const Login = () => {
             <Input
               type="password"
               name="password"
-              label="Password"
-              placeholder="Enter your password"
+              label="Mật khẩu"
+              placeholder="Nhập mật khẩu"
               value={formData.password}
               onChange={handleChange}
               error={formErrors.password}
@@ -175,10 +175,9 @@ const Login = () => {
                   checked={formData.rememberMe}
                   onChange={handleChange}
                 />
-                <span>Remember me</span>
+                <span>Ghi nhớ đăng nhập</span>
               </label>
-
-              <a href="#" className="login-forgot">Forgot password?</a>
+              <a href="#" className="login-forgot">Quên mật khẩu?</a>
             </div>
 
             <Button
@@ -188,12 +187,12 @@ const Login = () => {
               loading={isLoading}
               className="login-button"
             >
-              Sign In
+              Đăng nhập
             </Button>
           </form>
 
           <div className="login-footer">
-            <p>Don't have an account? <a href="#">Contact admin</a></p>
+            <p>Nếu bạn chưa có tài khoản, vui lòng liên hệ quản trị viên.</p>
           </div>
         </Card>
       </div>
