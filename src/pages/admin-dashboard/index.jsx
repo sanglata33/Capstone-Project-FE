@@ -59,8 +59,21 @@ const AdminDashboard = () => {
       showWarning('Vui lòng điền đầy đủ thông tin học kỳ!');
       return;
     }
-    if (new Date(endDate) <= new Date(startDate)) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const now = new Date();
+    if (end <= start) {
       showWarning('Ngày kết thúc phải sau ngày bắt đầu!');
+      return;
+    }
+    // Chỉ cho phép tạo học kỳ mới khi không có học kỳ nào đang hoạt động hoặc học kỳ hiện tại đã kết thúc
+    const active = semesters.find(s => s.isActive);
+    if (active && new Date(active.endDate) > now) {
+      showWarning('Chỉ được tạo học kỳ mới khi học kỳ hiện tại đã kết thúc!');
+      return;
+    }
+    if (start < now) {
+      showWarning('Ngày bắt đầu học kỳ phải sau ngày hiện tại!');
       return;
     }
     try {
