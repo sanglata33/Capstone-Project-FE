@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../stores/authStore.js';
+import NotificationBell from './NotificationBell.jsx';
 import './SupervisorLayout.css'; // Mượn tạm CSS của Supervisor
 
 const LecturerLayout = () => {
@@ -66,6 +67,8 @@ const LecturerLayout = () => {
             Thống Kê Cá Nhân
           </Link>
         </div>
+
+        <NotificationBell />
 
         <div className="navbar-user">
           <div className="user-info">
