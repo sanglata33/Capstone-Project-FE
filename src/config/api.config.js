@@ -64,6 +64,15 @@ export const API_ENDPOINTS = {
     LIST: '/users',
     DETAIL: (id) => `/users/${id}`,
   },
+
+  // Notification endpoints
+  NOTIFICATION: {
+    LIST: (userId) => `/api/notifications/user/${userId}`,
+    UNREAD: (userId) => `/api/notifications/user/${userId}/unread`,
+    UNREAD_COUNT: (userId) => `/api/notifications/user/${userId}/unread-count`,
+    MARK_READ: (id) => `/api/notifications/${id}/read`,
+    MARK_ALL_READ: (userId) => `/api/notifications/user/${userId}/read-all`,
+  },
 };
 
 export default apiConfig;
