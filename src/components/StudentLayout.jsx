@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../stores/authStore.js';
+import NotificationBell from './NotificationBell.jsx';
 import './SupervisorLayout.css'; 
 
 const StudentLayout = () => {
@@ -55,6 +56,8 @@ const StudentLayout = () => {
             Đăng ký Đề Tài
           </Link>
         </div>
+
+        <NotificationBell />
 
         <div className="navbar-user">
           <div className="user-info">

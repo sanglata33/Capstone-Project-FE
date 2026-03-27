@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../stores/authStore.js';
+import NotificationBell from './NotificationBell.jsx';
 import './CoordinatorLayout.css'; 
 
 const ModeratorLayout = () => {
@@ -54,6 +55,8 @@ const ModeratorLayout = () => {
             Thống Kê
           </Link>
         </div>
+
+        <NotificationBell />
 
         <div className="navbar-user">
           <div className="user-info">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../stores/authStore.js';
+import NotificationBell from './NotificationBell.jsx';
 import './ReviewerLayout.css';
 
 const ReviewerLayout = () => {
@@ -46,6 +47,8 @@ const ReviewerLayout = () => {
             Đề Tài Review
           </Link>
         </div>
+
+        <NotificationBell />
 
         <div className="navbar-user">
           <div className="user-info">
