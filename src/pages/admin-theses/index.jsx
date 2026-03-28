@@ -13,34 +13,37 @@ const AdminTheses = () => {
   const [theses, setTheses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [filterType, setFilterType] = useState('ALL'); // 'ALL' or 'PASSED'
+  const [selectedSemesterId, setSelectedSemesterId] = useState(null);
 
   // Modal detail states
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [selectedThesisDetail, setSelectedThesisDetail] = useState(null);
   const [isLoadingDetail, setIsLoadingDetail] = useState(false);
 
-  const { activeSemester, fetchActiveSemester } = useSemesterStore();
+  const { semesters, activeSemester, fetchActiveSemester, fetchSemesters, isLoading: semestersLoading } = useSemesterStore();
+
+  // Load all semesters on mount
+  useEffect(() => {
+    fetchSemesters();
+  }, [fetchSemesters]);
+
+  // Set default selected semester when semesters are loaded
+  useEffect(() => {
+    if (semesters.length > 0 && !selectedSemesterId) {
+      const active = semesters.find(s => s.isActive);
+      if (active) {
+        setSelectedSemesterId(active.id);
+      } else {
+        setSelectedSemesterId(semesters[0].id);
+      }
+    }
+  }, [semesters, selectedSemesterId]);
 
   useEffect(() => {
-    const initData = async () => {
-      try {
-        let sem = activeSemester;
-        if (!sem) {
-          sem = await fetchActiveSemester();
-        }
-        if (sem) {
-          await fetchTheses(sem.id, filterType);
-        } else {
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error('Lỗi khởi tạo:', error);
-        setIsLoading(false);
-      }
-    };
-    initData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterType, activeSemester]);
+    if (selectedSemesterId) {
+      fetchTheses(selectedSemesterId, filterType);
+    }
+  }, [filterType, selectedSemesterId]);
 
   const fetchTheses = async (semesterId, type) => {
     setIsLoading(true);
@@ -201,7 +204,34 @@ const AdminTheses = () => {
           <h1>Quản lý đề tài</h1>
           <p className="page-subtitle">Danh sách đề tài theo kỳ hiện tại</p>
         </div>
-        <div className="header-actions" style={{ display: 'flex', gap: '10px' }}>
+        <div className="header-actions" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          {/* Semester Selector */}
+          <div className="semester-selector-wrapper" style={{ marginRight: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <label style={{ fontWeight: 600, fontSize: '14px', whiteSpace: 'nowrap' }}>📅 Học kỳ:</label>
+            <select
+              value={selectedSemesterId || ''}
+              onChange={(e) => setSelectedSemesterId(Number(e.target.value))}
+              disabled={semestersLoading}
+              style={{
+                padding: '8px 12px',
+                borderRadius: '8px',
+                border: '1px solid var(--border-color)',
+                background: 'var(--bg-secondary)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                minWidth: '180px',
+                cursor: 'pointer',
+              }}
+            >
+              {semestersLoading && <option>Đang tải...</option>}
+              {semesters.map(sem => (
+                <option key={sem.id} value={sem.id}>
+                  {sem.name} ({sem.code}){sem.isActive ? ' ✅ Active' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <Button 
             variant={filterType === 'ALL' ? 'primary' : 'outline'} 
             size="md"
